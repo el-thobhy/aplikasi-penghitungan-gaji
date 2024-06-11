@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+}
+<form id="formAddPegawai">
+    <input type="hidden" name="CreateBy" value="admin" />
+    <div class="card">
+        <div class="h4 card-header">@ViewBag.Title</div>
+        <div class="card-body">
+            <div>
+                <label for="nomerPegawai">Nomer Pegawai:</label>
+                <input type="text" id="nomerPegawai" name="nomerPegawai" required>
+            </div>
+            <div>
+                <label for="namaPegawai">Nama Pegawai:</label>
+                <input type="text" id="namaPegawai" name="namaPegawai" required>
+            </div>
+            <div>
+                <label for="tanggalMasuk">Tanggal Masuk:</label>
+                <input type="date" id="tanggalMasuk" name="tanggalMasuk" required>
+            </div>
+            <div>
+                <label for="jenisKelamin">Jenis Kelamin:</label>
+                <select id="jenisKelamin" name="jenisKelamin" required>
+                    <option value="0">Laki-laki</option>
+                    <option value="1">Perempuan</option>
+                </select>
+            </div>
+            <div>
+                <label for="statusId">Status ID:</label>
+                <input type="number" id="statusId" name="statusId" required>
+            </div>
+            <div>
+                <label for="gajiPokok">Gaji Pokok:</label>
+                <input type="number" id="gajiPokok" name="gajiPokok" required>
+            </div>
+            <div>
+                <label for="uangMakan">Uang Makan:</label>
+                <input type="number" id="uangMakan" name="uangMakan" required>
+            </div>
+            <div>
+                <label for="uangTransport">Uang Transport:</label>
+                <input type="number" id="uangTransport" name="uangTransport" required>
+            </div>
+
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+
+    </div>
+</form>
+
+<script>
+
+    $("#formAddPegawai").submit(function (e) {
+        // disable form submit
+        e.preventDefault()
+
+            $.ajax({
+                url: "/Pegawai/Add",
+                type: "post",
+                data: $("#formAddPegawai").serialize(),
+                dataType: "json",
+                beforeSend: function () {
+                    // Loader
+
+                },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (errResponse) {
+                    alert();
+                }
+            })
+
+    })
+</script>
+
+
