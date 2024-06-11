@@ -31,5 +31,7 @@ namespace AplikasiPenghitungGaji.Web.Controllers
             }
             return View(data);
         }
+
+
     }
 }

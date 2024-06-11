@@ -13,5 +13,6 @@ namespace ViewModel
         public string Tanggal { get; set; }
         public int IdPegawai { get; set; }
         public int JumlahLembur { get; set; }
+        public ReturnPegawaiViewModel DataPegawai { get; set; }
     }
 }

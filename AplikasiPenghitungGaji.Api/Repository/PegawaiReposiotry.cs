@@ -143,5 +143,49 @@ namespace AplikasiPenghitungGaji.Api.Repository
             }
             return model;
         }
+
+        public List<LemburViewModel> GetLembur()
+        {
+            List<LemburViewModel> result = new List<LemburViewModel>();
+            result = (from o in _dbContext.TableLemburs
+                      where o.IsDeleted == false
+                      select new LemburViewModel
+                      {
+                          Id = o.Id,
+                          DokumenLembur = o.DokumenLembur,
+                          IdPegawai = o.IdPegawai,
+                          JumlahLembur = o.JumlahLembur,
+                          DataPegawai = new ReturnPegawaiViewModel
+                          {
+                              NomerPegawai = o.DataPegawai.NomerPegawai,
+                              NamaPegawai = o.DataPegawai.NamaPegawai,
+                              TanggalMasuk = o.DataPegawai.TanggalMasuk,
+                              JenisKelamin = o.DataPegawai.JenisKelamin,
+                              StatusId = o.DataPegawai.StatusId,
+                              NilaiTunjangan = o.DataPegawai.NilaiTunjangan,
+                              GajiPokok = o.DataPegawai.GajiPokok,
+                              Status = new StatusViewModel
+                              {
+                                  Id = o.Id,
+                                  JenisStatus = o.DataPegawai.Status.JenisStatus,
+                                  Deskripsi = o.DataPegawai.Status.Deskripsi,
+                                  NilaiTunjangan = o.DataPegawai.Status.NilaiTunjangan,
+                                  CreateBy = o.DataPegawai.Status.CreateBy,
+                                  CreateDate = o.DataPegawai.Status.CreateDate
+                              },
+                              UangMakan = o.DataPegawai.UangMakan,
+                              UangTransport = o.DataPegawai.UangTransport,
+                              CreateBy = o.DataPegawai.CreateBy,
+                              CreateDate = o.DataPegawai.CreateDate,
+                              IsDeleted = o.DataPegawai.IsDeleted,
+                              JenisStatus = o.DataPegawai.Status.JenisStatus,
+                              UangLembur = o.DataPegawai.UangLembur,
+                              Id = o.Id,
+                          },
+                          Tanggal = o.Tanggal
+                      }).ToList();
+
+            return result;
+        }
     }
 }

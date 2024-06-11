@@ -24,12 +24,17 @@ namespace AplikasiPenghitungGaji.Api.Controllers
         [HttpGet]
         public async Task<List<ReturnPegawaiViewModel>> GetAllPegawai()
         {
-           return _repo.GetAllPegawai();
+            return _repo.GetAllPegawai();
         }
         [HttpPost("Lembur")]
         public async Task<LemburViewModel> CreateDataLembur(LemburViewModel data)
         {
             return _repo.CreateDataLembur(data);
+        }
+        [HttpGet("GetLembur")]
+        public async Task<List<LemburViewModel>> GetDataLembuer()
+        {
+            return _repo.GetLembur();
         }
     }
 }
