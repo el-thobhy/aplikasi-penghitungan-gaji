@@ -29,12 +29,13 @@ namespace AplikasiPenghitungGaji.Api.Controllers
             return _repo.GetAllPegawai();
         }
         [HttpPost("Lembur")]
+        [ReadableBodyStream(Roles = "ADMINISTRATOR")]
         public async Task<LemburViewModel> CreateDataLembur(LemburViewModel data)
         {
             return _repo.CreateDataLembur(data);
         }
         [HttpGet("GetLembur")]
-        public async Task<List<LemburViewModel>> GetDataLembuer()
+        public async Task<List<GetAllLemburViewModel>> GetDataLembuer()
         {
             return _repo.GetLembur();
         }

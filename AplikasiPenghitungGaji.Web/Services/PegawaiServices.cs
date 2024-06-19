@@ -36,7 +36,7 @@ namespace AplikasiPenghitungGaji.Web.Services
             }
             else
             {
-                throw new Exception();
+                throw new Exception(request.StatusCode.ToString());
             }
             return response;
         }       

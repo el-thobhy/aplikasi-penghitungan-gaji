@@ -82,12 +82,12 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
-builder.Services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
-    builder =>
-    {
-        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-    }
-    ));
+
+builder.Services.AddCors(policyBuilder =>
+    policyBuilder.AddDefaultPolicy(policy =>
+        policy.WithOrigins("*").AllowAnyMethod().AllowAnyHeader()
+    )
+);
 
 var app = builder.Build();
 

@@ -109,7 +109,7 @@ namespace AplikasiPenghitungGaji.Api.Repository
                     DokumenLembur = model.DokumenLembur,
                     Tanggal = model.Tanggal,
                     JumlahLembur = model.JumlahLembur,
-                    CreateBy = ClaimContext.UserName(),
+                    CreateBy = ClaimContext.UserName() ,
                     CreateDate = DateTime.Now,
                     NomerPegawai = pegawai.NomerPegawai
                 };
@@ -146,12 +146,12 @@ namespace AplikasiPenghitungGaji.Api.Repository
             return model;
         }
 
-        public List<LemburViewModel> GetLembur()
+        public List<GetAllLemburViewModel> GetLembur()
         {
-            List<LemburViewModel> result = new List<LemburViewModel>();
+            List<GetAllLemburViewModel> result = new List<GetAllLemburViewModel>();
             result = (from o in _dbContext.TableLemburs
                       where o.IsDeleted == false
-                      select new LemburViewModel
+                      select new GetAllLemburViewModel
                       {
                           Id = o.Id,
                           DokumenLembur = o.DokumenLembur,

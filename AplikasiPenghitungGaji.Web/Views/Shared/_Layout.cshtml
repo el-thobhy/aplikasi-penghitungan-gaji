@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string token = @Context.Session.GetString("Token") ?? "";
+    string user = @Context.Session.GetString("UserName") ?? "";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,6 +34,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Lembur" asp-action="Index">Lembur</a>
                         </li>
                     </ul>
+                    <div>
+                        @if (token != "")
+                        {
+                            <span>@user</span>
+                            <a id="btn-logout" class="p-2 m rounded-3" asp-controller="Auth" asp-action="Logout" type="button">Logout</a>
+                        }
+                        else{
+                            <button type="button" id="btn-login" class="p-2 m rounded-3">Login</button>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
@@ -51,6 +66,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $("#btn-login").click(function () {
+            $("#staticBackdropBody").load("/Auth/Index");
+            $("#staticBackdrop").modal("show");
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

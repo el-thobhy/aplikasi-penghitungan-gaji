@@ -1,6 +1,6 @@
 ﻿@using ViewModel;
 
-@model List<LemburViewModel>
+@model List<GetAllLemburViewModel>
 @{
     ViewData["Title"] = "Lembur";
 }
@@ -13,7 +13,7 @@
         <div class="row mb-3">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
-                    <button id="btn_create" class="btn btn-primary" data-bs-toggle="modal", data-bs-target="#staticBackdrop">Create</button>
+                    <button id="btn_create_lembur" class="btn btn-primary" data-bs-toggle="modal", data-bs-target="#staticBackdrop">Create</button>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     @foreach(var item in Model)
                     {
                         <tr>
-                            <td>@item.DataPegawai.NomerPegawai</td>
+                            <td>@item.DataPegawai.Id</td>
                             <td>@item.DataPegawai.NamaPegawai</td>
                             <td>@item.DataPegawai.TanggalMasuk</td>
                             <td>@item.DataPegawai.JenisKelamin</td>
@@ -72,7 +72,7 @@
     </div>
 </div>
 <script>
-    $("#btn_create").click(function () {
+    $("#btn_create_lembur").click(function () {
         $("#staticBackdropBody").load("/Lembur/Create");
     });
 </script>

@@ -14,8 +14,26 @@ namespace AplikasiPenghitungGaji.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<LemburViewModel> data = await _services.GetAllLembur();
+            List<GetAllLemburViewModel> data = await _services.GetAllLembur();
             return View(data);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.Title = "Input Data Lembur";
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(LemburViewModel model)
+        {
+
+            string token = HttpContext.Session.GetString("Token");
+            LemburViewModel data = await _services.CreateLembur(model, token);
+            if(data.Id < 0)
+            {
+                ViewBag.Message = "Fail To Post Data";
+            }
+            return RedirectToAction("Index", "Pegawai");
         }
     }
 }
