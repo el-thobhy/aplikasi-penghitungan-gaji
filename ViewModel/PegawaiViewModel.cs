@@ -25,6 +25,6 @@ namespace ViewModel
         public StatusViewModel? Status { get; set; }
         public string? CreateBy { get; set; }
         public DateTime? CreateDate { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
     }
 }

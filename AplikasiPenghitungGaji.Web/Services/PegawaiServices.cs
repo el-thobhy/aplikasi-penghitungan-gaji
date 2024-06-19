@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using ViewModel;
 
@@ -22,10 +24,13 @@ namespace AplikasiPenghitungGaji.Web.Services
             return data ?? new List<ReturnPegawaiViewModel>();
         }
 
-        public async Task<PegawaiViewModel> CreateDataPegawai(PegawaiViewModel input)
+        public async Task<PegawaiViewModel> CreateDataPegawai(PegawaiViewModel input, string token)
         {
             string json = JsonConvert.SerializeObject(input);
             StringContent content = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+
+            // Token
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
 
             var request = await client.PostAsync($"{routeApi}/Pegawai", content);

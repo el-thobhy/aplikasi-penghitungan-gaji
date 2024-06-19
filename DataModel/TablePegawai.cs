@@ -63,4 +63,5 @@ namespace DataModel
             builder.Property(x => x.NilaiTunjangan).HasPrecision(10, 0);
         }
     }
+
 }

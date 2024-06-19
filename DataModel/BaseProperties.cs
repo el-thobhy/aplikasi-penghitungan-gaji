@@ -16,7 +16,7 @@ namespace DataModel
         public string? DeletedBy { get; set; }
         public DateTime? DeletedDate { get; set; }
 
-        public bool IsDeleted { get; set; } = false;
+        public bool? IsDeleted { get; set; } = false;
 
     }
 }

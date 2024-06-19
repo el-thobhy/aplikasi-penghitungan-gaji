@@ -24,7 +24,8 @@ namespace AplikasiPenghitungGaji.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(PegawaiViewModel data)
         {
-            PegawaiViewModel response = await _pegawaiServices.CreateDataPegawai(data);
+            string? token = HttpContext.Session.GetString("Token");
+            PegawaiViewModel response = await _pegawaiServices.CreateDataPegawai(data, token ?? "");
             if(response.StatusId>0)
             {
                 return Json(new { dataResponse = response });

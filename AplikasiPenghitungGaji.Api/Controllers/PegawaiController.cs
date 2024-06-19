@@ -3,6 +3,7 @@ using DataModel;
 using Framework.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Protocols;
 using ViewModel;
 
 namespace AplikasiPenghitungGaji.Api.Controllers
@@ -12,9 +13,11 @@ namespace AplikasiPenghitungGaji.Api.Controllers
     public class PegawaiController : ControllerBase
     {
         private PegawaiReposiotry _repo;
-        public PegawaiController(PegawaiDbContext dbContext)
+        private RepositoryDapper _repoDapper;
+        public PegawaiController(PegawaiDbContext dbContext, IConfiguration config)
         {
             _repo = new PegawaiReposiotry(dbContext);
+            _repoDapper = new RepositoryDapper(config["ConnectionStrings:DB_Conn"]);
         }
 
         [HttpPost]
@@ -23,6 +26,20 @@ namespace AplikasiPenghitungGaji.Api.Controllers
         {
             return _repo.CreateDataPegawai(data);
         }
+
+        //Native Query
+        [HttpPost("CreatePegawaiNative")]
+        [ReadableBodyStream(Roles = "ADMINISTRATOR")]
+        public async Task<PegawaiViewModel> CreatePegawaiNative(PegawaiViewModel data)
+        {
+            return _repoDapper.CreateDataPegawai(data);
+        }
+        [HttpGet("GetPegawaiNative")]
+        public async Task<List<ReturnPegawaiViewModel>> GetPegawaiNative()
+        {
+            return _repoDapper.GetPegawaiNative();
+        }
+
         [HttpGet]
         public async Task<List<ReturnPegawaiViewModel>> GetAllPegawai()
         {
